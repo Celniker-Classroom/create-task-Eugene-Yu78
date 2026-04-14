@@ -1,3 +1,4 @@
+<!For my Create task project I plan on creating a cool mental math speed game where players can select 4 levels, Addition, Subtraction, Multiplication, and Division. They can also choose the maximum value for the equations. Then they will have 60 seconds to answer as many questions as possible, amounting to their score. There will be an average score calculation and also a leaderboard.>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Your html goes here...</h1>
-    <br>See the <a href="README.md">README</a> for project details
+    <h3>Level</h3>
+    <input type="radio" name="level" id="a" checked><label for="a">Addition</label>
+    <input type="radio" name="level" id="s"><label for="s">Subtraction</label>
+    <input type="radio" name="level" id="m"><label for="m">Multiplication</label>
+    <input type="radio" name="level" id="d"><label for="d">Division</label>
+    <input type="text" id="maxValue" placeholder="Enter Maximum Value">
+
+    <button id="playBtn">Play</button>
+    <h3 id="msg">Select a Level</h3>
+    <p id="timeRemaining">Time Remaining: </p>
+    <p id="question">Question: </p>
+
+    <input type="text" id="guess">
+    <button id="enterBtn" disabled>Enter</button>
+    <button id="giveUpBtn" disabled>Give Up</button>
+    
+    <h3>Stats</h3>
+    
+    <p id="avgScore">Average Score: </p>
+
+    <h3>Leaderboard</h3>
+    <ol>
+      <li name="leaderboard">100</li>
+      <li name="leaderboard">100</li>
+      <li name="leaderboard">100</li>
+    </ol>
+
 </body>
 </html>
