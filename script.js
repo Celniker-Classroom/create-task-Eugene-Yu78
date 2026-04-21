@@ -21,31 +21,26 @@ function startGame() {
         document.getElementById("msg").textContent = "Please enter a valid positive number.";
         return;
     }
-
     maxValue = guess;
     score = 0;
     giveups = 0;
     wrong = 0;
     totalRounds = 0;
     secondsLeft = 60;
-
     document.getElementById("msg").textContent = "Solve as many questions as possible in 1 minute!!!";
     document.getElementById("enterBtn").disabled = false;
     document.getElementById("giveUpBtn").disabled = false;
     document.getElementById("playBtn").disabled = true;
-
     let levelRadios = document.getElementsByName("level");
     for (let i = 0; i < levelRadios.length; i++) {
         levelRadios[i].disabled = true;
     }
-
     if (gameTimer) {
         clearTimeout(gameTimer);
     }
     if (countdownTimer) {
         clearInterval(countdownTimer);
     }
-
     gameTimer = setTimeout(endGame, 60000);
     countdownTimer = setInterval(() => {
         secondsLeft -= 1;
@@ -54,12 +49,10 @@ function startGame() {
             clearInterval(countdownTimer);
         }
     }, 1000);
-
     document.getElementById("timeRemaining").textContent = `Time Remaining: ${secondsLeft}s`;
     updateStatsDisplay();
     generateQuestion();
 }
-
 function endGame() {
     if (gameTimer) {
         clearTimeout(gameTimer);
@@ -69,7 +62,6 @@ function endGame() {
         clearInterval(countdownTimer);
         countdownTimer = null;
     }
-
     totalGames += 1;
     totalScore += score;
     updateLeaderboard();
@@ -82,10 +74,8 @@ function endGame() {
     for (let i = 0; i < levelRadios.length; i++) {
         levelRadios[i].disabled = false;
     }
-
     updateStatsDisplay();
 }
-
 function generateQuestion() {
     let radios = document.getElementsByName("level");
     if (radios[0].checked) {
@@ -100,14 +90,12 @@ function generateQuestion() {
         addition();
     }
 }
-
 function addition() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = rand1 + rand2;
     document.getElementById("question").textContent = `${rand1} + ${rand2} =`;
 }
-
 function subtraction() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
@@ -115,41 +103,35 @@ function subtraction() {
     answer = rand1 - rand2;
     document.getElementById("question").textContent = `${rand1} - ${rand2} =`;
 }
-
 function multiplication() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = rand1 * rand2;
     document.getElementById("question").textContent = `${rand1} × ${rand2} =`;
 }
-
 function division() {
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = Math.floor(Math.random() * maxValue) + 1;
     rand1 = rand2 * answer;
     document.getElementById("question").textContent = `${rand1} ÷ ${rand2} =`;
 }
-
 function updateLeaderboard() {
     scores.push(score);
     scores.sort((a, b) => b - a);
     if (scores.length > 3) {
         scores = scores.slice(0, 3);
     }
-
     const leaderboardItems = document.querySelectorAll("[data-leaderboard-item]");
     leaderboardItems.forEach((item, index) => {
         item.textContent = scores[index] !== undefined ? scores[index] : "—";
     });
 }
-
 function updateStatsDisplay() {
     const avg = totalGames > 0 ? (totalScore / totalGames).toFixed(2) : "0";
     document.getElementById("avgScore").textContent = `Average Score: ${avg}`;
     document.getElementById("totalRounds").textContent = `Total Rounds: ${totalRounds}`;
     document.getElementById("wrong").textContent = `Incorrect Answers: ${wrong}`;
 }
-
 // guess
 document.getElementById("enterBtn").addEventListener("click", function() {
     let input = document.getElementById("guess");
@@ -158,7 +140,6 @@ document.getElementById("enterBtn").addEventListener("click", function() {
         document.getElementById("msg").textContent = "Please enter a valid number.";
         return;
     }
-
     totalRounds++;
     if (guess === answer) {
         score++;
@@ -167,12 +148,10 @@ document.getElementById("enterBtn").addEventListener("click", function() {
         wrong++;
         document.getElementById("msg").textContent = `Wrong! Answer was ${answer}. Next question.`;
     }
-
     input.value = "";
     generateQuestion();
     updateStatsDisplay();
 });
-
 // give up
 document.getElementById("giveUpBtn").addEventListener("click", function() {
     giveups++;
@@ -182,7 +161,6 @@ document.getElementById("giveUpBtn").addEventListener("click", function() {
     generateQuestion();
     updateStatsDisplay();
 });
-
 // play
 document.getElementById("playBtn").addEventListener("click", function() {
     document.getElementById("guess").value = "";
