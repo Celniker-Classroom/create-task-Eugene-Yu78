@@ -113,6 +113,10 @@ function division() {
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = Math.floor(Math.random() * maxValue) + 1;
     rand1 = rand2 * answer;
+    if (rand1 > maxValue) {
+        division();
+        return;
+    }
     document.getElementById("question").textContent = `${rand1} ÷ ${rand2} =`;
 }
 function updateLeaderboard() {
