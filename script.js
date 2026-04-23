@@ -122,6 +122,7 @@ function division() {
 }
 function updateLeaderboard() {
     scores.push(score);
+    scores.sort((a, b) => b - a);
     //github ai help with this part, i asked it how to push the top 3 scores to the leaderboard
     if (scores.length > 3) {
         scores = scores.slice(0, 3);
