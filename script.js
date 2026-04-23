@@ -51,7 +51,7 @@ function startGame() {
         }
     }, 1000);
     document.getElementById("timeRemaining").textContent = `Time Remaining: ${secondsLeft}s`;
-    updateStatsDisplay();
+    updateStats();
     generateQuestion();
 }
 function endGame() {
@@ -75,7 +75,7 @@ function endGame() {
     for (let i = 0; i < levelRadios.length; i++) {
         levelRadios[i].disabled = false;
     }
-    updateStatsDisplay();
+    updateStats();
 }
 function generateQuestion() {
     let radios = document.getElementsByName("level");
@@ -95,20 +95,20 @@ function addition() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = rand1 + rand2;
-    document.getElementById("question").textContent = `${rand1} + ${rand2} =`;
+    document.getElementById("question").textContent = `Question: ${rand1} + ${rand2} =`;
 }
 function subtraction() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     if (rand1 < rand2) [rand1, rand2] = [rand2, rand1];
     answer = rand1 - rand2;
-    document.getElementById("question").textContent = `${rand1} - ${rand2} =`;
+    document.getElementById("question").textContent = `Question: ${rand1} - ${rand2} =`;
 }
 function multiplication() {
     rand1 = Math.floor(Math.random() * maxValue) + 1;
     rand2 = Math.floor(Math.random() * maxValue) + 1;
     answer = rand1 * rand2;
-    document.getElementById("question").textContent = `${rand1} × ${rand2} =`;
+    document.getElementById("question").textContent = `Question: ${rand1} × ${rand2} =`;
 }
 function division() {
     rand2 = Math.floor(Math.random() * maxValue) + 1;
@@ -118,7 +118,7 @@ function division() {
         division();
         return;
     }
-    document.getElementById("question").textContent = `${rand1} ÷ ${rand2} =`;
+    document.getElementById("question").textContent = `Question: ${rand1} ÷ ${rand2} =`;
 }
 function updateLeaderboard() {
     scores.push(score);
@@ -131,7 +131,7 @@ function updateLeaderboard() {
         item.textContent = scores[index] !== undefined ? scores[index] : "—";
     });
 }
-function updateStatsDisplay() {
+function updateStats() {
     const avg = totalGames > 0 ? (totalScore / totalGames).toFixed(2) : "0";
     document.getElementById("avgScore").textContent = `Average Score: ${avg}`;
     document.getElementById("totalRounds").textContent = `Total Rounds: ${totalRounds}`;
@@ -155,7 +155,7 @@ document.getElementById("enterBtn").addEventListener("click", function() {
     }
     input.value = "";
     generateQuestion();
-    updateStatsDisplay();
+    updateStats();
 });
 // give up
 document.getElementById("giveUpBtn").addEventListener("click", function() {
@@ -164,7 +164,7 @@ document.getElementById("giveUpBtn").addEventListener("click", function() {
     document.getElementById("msg").textContent = `Gave up! Answer was ${answer}. Next question.`;
     document.getElementById("guess").value = "";
     generateQuestion();
-    updateStatsDisplay();
+    updateStats();
 });
 // play
 document.getElementById("playBtn").addEventListener("click", function() {
